@@ -110,4 +110,34 @@ public class Todoist{
         }
         
     } 
+    
+    /**
+     * Muestra solo las tareas en posiciones impares sin numero delante ni nada,
+     * solo la tarea
+     */
+    public void mostrarTareasEnPosicionImpar2(){
+        int numeroPosicion = 1;
+        for (String tarea : tareas){
+            
+            if(numeroPosicion % 2 != 0){
+                System.out.println(tarea);
+            }
+            numeroPosicion ++;
+        }
+        
+    } 
+    
+    /**
+     * Muestra por pantalla todas las tareas que contienen el texto indicado
+     * como parámetro, una en cada linea. Si no hay ninguna que contenga el texto
+     * buscado, no muestra nada
+     */
+    public void mostrarCoincidenctes(String textoABuscar)
+    {
+        for (String tarea : tareas){
+            if(tarea.contains(textoABuscar)){
+                System.out.println(tarea);
+            }
+        }
+    }
 }
