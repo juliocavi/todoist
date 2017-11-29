@@ -95,7 +95,7 @@ public class Todoist{
             numeroPosicion = numeroPosicion + 1;
         }
     }
-        
+
     /**
      * Muestra solo las tareas en posiciones impares sin numero delante ni nada,
      * solo la tarea
@@ -108,9 +108,9 @@ public class Todoist{
                 System.out.println(tarea);
             }
         }
-        
+
     } 
-    
+
     /**
      * Muestra solo las tareas en posiciones impares sin numero delante ni nada,
      * solo la tarea
@@ -118,26 +118,76 @@ public class Todoist{
     public void mostrarTareasEnPosicionImpar2(){
         int numeroPosicion = 1;
         for (String tarea : tareas){
-            
+
             if(numeroPosicion % 2 != 0){
                 System.out.println(tarea);
             }
             numeroPosicion ++;
         }
-        
+
     } 
+
+    /**
+     * Muestra por pantalla todas las tareas que contienen el texto indicado
+     * como parámetro, una en cada linea. 
+     * Y ademas muestra un mensaje al final indicando
+     * el numero de coincidencias encontradas.
+     * Este metodo es insensible a mayusculas o minusculas.
+     * Si no hay ninguna que contenga el texto
+     * buscado informa de la situacion 
+     */
+    public void mostrarCoincidentes(String textoABuscar)
+    {
+        boolean hayCoincidencia = false;
+        int numCoincidencias = 0;
+        for (String tarea : tareas){
+            if(tarea.toLowerCase().contains(textoABuscar.toLowerCase())){
+                System.out.println(tarea);
+                hayCoincidencia = true;
+                numCoincidencias++;
+            }
+
+        }
+        if (hayCoincidencia == false){
+            System.out.println("Sorry, we dont found what are u searching about");
+        }
+        else{
+            System.out.println("tenemos" + numCoincidencias + "tareas coincidentes");
+        }
+        
+    }
     
     /**
      * Muestra por pantalla todas las tareas que contienen el texto indicado
-     * como parámetro, una en cada linea. Si no hay ninguna que contenga el texto
-     * buscado, no muestra nada
+     * como parámetro, una en cada linea, y ademas muestra un mensaje al final indicando
+     * el numero de coincidencias encontradas. Si no hay ninguna que contenga el texto
+     * buscado informa de la situacion. Este metodo es insensible a mayusculas o minusculas
      */
-    public void mostrarCoincidenctes(String textoABuscar)
+    public void mostrarCoincidentes2(String textoABuscar)
     {
+        int numCoincidencias = 0;
         for (String tarea : tareas){
-            if(tarea.contains(textoABuscar)){
-                System.out.println(tarea);
-            }
+           if (tarea.toLowerCase().contains(textoABuscar.toLowerCase())){
+               System.out.println(tarea);
+               numCoincidencias++;
+           } 
+            
         }
+        
+        if (numCoincidencias == 0) { 
+            System.out.println("No se ha encontrado ninguna tarea con el texto buscado!");
+        }
+        else {
+            System.out.println("Hay " + numCoincidencias + " tareas coincidentes");
+        }
+    }
+    
+    /**
+     * Muestra por pantalla la primera tarea que contenga el texto indicado como 
+     * parametro. En caso de que no haya ninguna coincidencia no muestra nada
+     */
+    public void mostrarPrimeraCoincidente(String textoABuscar)
+    {
+        
     }
 }
