@@ -154,9 +154,9 @@ public class Todoist{
         else{
             System.out.println("tenemos" + numCoincidencias + "tareas coincidentes");
         }
-        
+
     }
-    
+
     /**
      * Muestra por pantalla todas las tareas que contienen el texto indicado
      * como parámetro, una en cada linea, y ademas muestra un mensaje al final indicando
@@ -167,13 +167,13 @@ public class Todoist{
     {
         int numCoincidencias = 0;
         for (String tarea : tareas){
-           if (tarea.toLowerCase().contains(textoABuscar.toLowerCase())){
-               System.out.println(tarea);
-               numCoincidencias++;
-           } 
-            
+            if (tarea.toLowerCase().contains(textoABuscar.toLowerCase())){
+                System.out.println(tarea);
+                numCoincidencias++;
+            } 
+
         }
-        
+
         if (numCoincidencias == 0) { 
             System.out.println("No se ha encontrado ninguna tarea con el texto buscado!");
         }
@@ -181,13 +181,82 @@ public class Todoist{
             System.out.println("Hay " + numCoincidencias + " tareas coincidentes");
         }
     }
-    
+
     /**
      * Muestra por pantalla la primera tarea que contenga el texto indicado como 
      * parametro. En caso de que no haya ninguna coincidencia no muestra nada
      */
     public void mostrarPrimeraCoincidente(String textoABuscar)
+    {   
+        int numCoincidencias = 0;
+        for(String tarea : tareas){
+            if(tarea.toLowerCase().contains(textoABuscar.toLowerCase())){
+                numCoincidencias++;
+                if(numCoincidencias == 1){
+                    System.out.println(tarea);
+                }
+            }
+        }
+    }
+
+    /**
+     * la variable es false, cuando se cumple es true, 
+     * con lo cual cuando es !yaSeHa..., es falso 
+     * ###LO MISMO NO LO TENGO BIEN PLANTEADA ESTA EXPLICACION
+     */
+
+    public void mostrarPrimeraCoincidente2(String textoABuscar)
+    {   
+        boolean yaSeHaImpresoLaPrimeraTareaCoincidente = false;
+        for(String tarea : tareas){
+            if(tarea.toLowerCase().contains(textoABuscar.toLowerCase())){
+                if(!yaSeHaImpresoLaPrimeraTareaCoincidente){
+                    System.out.println(tarea);
+                    yaSeHaImpresoLaPrimeraTareaCoincidente = true;
+                }
+            }
+        }
+    }
+
+    /**
+     * Muestra por pantalla todas las tareas existentes, una por línea,
+     * usando un bucle while
+     */
+    public void mostrarTareas2()
     {
-        
+        int posicionTareaActual = 0;
+        while(posicionTareaActual < tareas.size()){
+            System.out.println(tareas.get(posicionTareaActual));
+            posicionTareaActual++;
+        }
+    }
+
+    /**
+     * Muestra las tareas numeradas usando un bucle while empezando en 1
+     */
+    public void mostrarTareasNumeradas2()
+    {
+        int numeroPosicion = 0;
+        while(numeroPosicion < tareas.size()){
+            System.out.println((numeroPosicion + 1) + ". " + tareas.get(numeroPosicion));
+            numeroPosicion++;
+        }
+    }
+
+    /**
+     * Muestra por pantalla las primeras n tareas (siendo n un parametro). En
+     * caso de que no haya suficientes tareas muestra solo las que haya.
+     * EL BUCLE PARA 
+     * CUANDO LA POSICION DE LA ULTIMA TAREA COINCIDE CON EL PARAMETRO INTRODUCIDO
+     * Y CUANDO LA POSICION DE LA ULTIMA TAREA COINCIDE CON EL TOTAL DE TAREAS
+     */
+    public void mostrarNPrimeras(int numeroDeTareasAMostrar){
+        int posicionActual = 0;
+        while(posicionActual < numeroDeTareasAMostrar && posicionActual < tareas.size()){
+            System.out.println(tareas.get(posicionActual));
+            posicionActual++;
+            
+        }
     }
 }
+
