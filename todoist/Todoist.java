@@ -86,12 +86,21 @@ public class Todoist{
     /** 
      * Metodo que imprime todas las tareas existentes, una por linea.
      * El metodo imprime el numero de posicion de la tarea antes del
-     * nombre de la tarea.
-     */  
-    public void mostrarTareasNumeradas(){
+     * nombre de la tarea. Si la tarea esta completada se muestra un
+     * "[X]" antes de la tarea y si no esta completada se muestra un
+     * "[ ]".
+     */
+    public void mostrarTareasNumeradas()
+    {
         int numeroPosicion = 1;
         for (String tarea : tareas){
-            System.out.println(numeroPosicion + ". " + tarea);
+            if (tarea.substring(0,1).equals("$")) {
+                System.out.println(numeroPosicion + ". [X] " + tarea.substring(1, tarea.length()));                
+            }
+            else {
+                System.out.println(numeroPosicion + ". [ ] " + tarea);                 
+            }
+
             numeroPosicion = numeroPosicion + 1;
         }
     }
@@ -255,8 +264,99 @@ public class Todoist{
         while(posicionActual < numeroDeTareasAMostrar && posicionActual < tareas.size()){
             System.out.println(tareas.get(posicionActual));
             posicionActual++;
-            
+
         }
     }
-}
 
+       /**
+     * Devuelve true si hay al menos una tarea que contenga el texto indicado
+     * como parámetro y false en caso contrario. El metodo se debe ejecutar de la
+     * forma mas rapida posible
+     */
+    
+    //con un boucle for each
+    
+    public boolean hayTareaCoincidente(String textoABuscar){
+        boolean comprobar = false;
+        for (String tarea : tareas){
+            if(tarea.contains(textoABuscar)){
+                comprobar = true;
+            }
+        }
+        return comprobar;
+    }
+    
+    /**
+     * Devuelve true si hay al menos una tarea que contenga el texto indicado
+     * como parámetro y false en caso contrario. El metodo se debe ejecutar de la
+     * forma mas rapida posible
+     */
+
+    public boolean hayTareaCoincidenteEficiente(String textoABuscar){
+        boolean comprobar = false;
+        String tarea = "";
+        int contador = 0;
+        
+        while(contador < tareas.size() && comprobar == false){
+            tarea = tareas.get(contador);
+            if(tarea.contains(textoABuscar)){
+                comprobar = true;
+            }
+            contador+=1;
+        }
+        
+        return comprobar;
+        
+    }
+    
+    /**
+     * Elimina la primera tarea que contiene el texto indicado por parámetro
+     */
+    public void eliminaPrimeraTareaCoincidente(String textoABuscar)
+    {
+        boolean hayCoincidencia = false;
+        String tareaActual = "";
+        int i = 0;
+        while (!hayCoincidencia && i < tareas.size()){
+            tareaActual = tareas.get(i);
+            if(tareas.get(i).toLowerCase().contains(textoABuscar.toLowerCase())){
+                tareas.remove(tareaActual);
+                hayCoincidencia = true;
+            }
+            i++;
+        }
+    }
+    
+    
+    /**
+     * Elimina todas las tareas que contienen el texto a buscar
+     */
+    public void eliminaTodasTareasCoincidentes(String textoABuscar) 
+    {
+        String tareaActual = "";
+        int i = 0;
+        while ( i < tareas.size()){
+            tareaActual = tareas.get(i);
+            if(tareaActual.toLowerCase().contains(textoABuscar.toLowerCase())){
+                tareas.remove(i);
+            }
+            else {
+                i++;
+            }
+        }
+        
+    }
+    
+    
+    /**
+     * Marca como completada la tarea indicada como parametro. Por ejemplo,
+     * si el parámetro es 0 marca como completada la primera tarea, si es 1 la
+     * segunda, etc.
+     */
+    public void marcarComoCompletada(int indiceTarea)
+    {
+        String tarea = tareas.get(indiceTarea);
+        tarea = "$" + tarea;
+        tareas.set(indiceTarea, tarea);
+    }
+}
